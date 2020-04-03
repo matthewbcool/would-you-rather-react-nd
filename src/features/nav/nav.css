@@ -1,0 +1,25 @@
+.nav-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nav-ul {
+	display: flex;
+	justify-content: space-between;
+	flex-direction: row;
+	list-style-type: none;
+	width: 50vw;
+}
+
+.login-wrapper {
+	display: flex;
+	align-items: center;
+	width: 50vw;
+	justify-content: flex-end;
+}
+
+img {
+	width: 38px;
+	height: 38px;
+}
