@@ -23,3 +23,7 @@ img {
 	width: 38px;
 	height: 38px;
 }
+
+.logout-menu-item {
+	margin: 0 7px;
+}

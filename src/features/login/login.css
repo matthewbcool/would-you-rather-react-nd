@@ -1,0 +1,13 @@
+.select-profile-wrapper {
+	width: 200px;
+	margin: 20px auto;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid black;
+}
+
+.select-profile-wrapper:hover {
+	background-color: yellow;
+}

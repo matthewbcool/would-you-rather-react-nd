@@ -1,12 +1,15 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { isLoggedIn } from '../login/loginSlice';
+import { useSelector } from 'react-redux';
 
-const PrivateRoute = () => {
+const PrivateRoute = ({ children, ...rest }) => {
+	const loggedIn = useSelector(isLoggedIn);
 	return (
 		<Route
 			{...rest}
 			render={({ location }) =>
-				fakeAuth.isAuthenticated ? (
+				loggedIn ? (
 					children
 				) : (
 					<Redirect

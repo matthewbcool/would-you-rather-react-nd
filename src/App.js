@@ -6,6 +6,8 @@ import './App.css';
 import HomeScreen from './features/home/HomeScreen';
 import LeaderBoard from './features/leaderboard/LeaderBoard';
 import NewQuestion from './features/new_qestion/NewQuestion';
+import Login from './features/login/Login';
+import PrivateRoute from './features/private_route/PrivateRoute';
 
 function App() {
 	return (
@@ -13,14 +15,17 @@ function App() {
 			<div className="App">
 				<Nav />
 				<Switch>
-					<Route exact path="/">
+					<PrivateRoute exact path="/">
 						<HomeScreen />
-					</Route>
-					<Route exact path="/new-question">
+					</PrivateRoute>
+					<PrivateRoute exact path="/new-question">
 						<NewQuestion />
-					</Route>
-					<Route path="/leaderboards">
+					</PrivateRoute>
+					<PrivateRoute path="/leaderboards">
 						<LeaderBoard />
+					</PrivateRoute>
+					<Route path="/login">
+						<Login />
 					</Route>
 				</Switch>
 
