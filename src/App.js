@@ -8,6 +8,7 @@ import LeaderBoard from './features/leaderboard/LeaderBoard';
 import NewQuestion from './features/new_qestion/NewQuestion';
 import Login from './features/login/Login';
 import PrivateRoute from './features/private_route/PrivateRoute';
+import NoMatch from './features/no_match_route/NoMatch';
 
 function App() {
 	return (
@@ -26,6 +27,9 @@ function App() {
 					</PrivateRoute>
 					<Route path="/login">
 						<Login />
+					</Route>
+					<Route path="*">
+						<NoMatch />
 					</Route>
 				</Switch>
 

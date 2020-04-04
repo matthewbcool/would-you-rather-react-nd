@@ -25,7 +25,6 @@ const Nav = () => {
 				<li>
 					<Link to="/leaderboards">Leaderboards</Link>
 				</li>
-				<li>{Logged ? 'True' : 'False'}</li>
 			</ul>
 
 			<div className="login-wrapper">
