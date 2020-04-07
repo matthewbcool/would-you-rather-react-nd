@@ -21,7 +21,7 @@ const UnAnswered = (props) => {
 					<input type="radio" id="dewey" name="drone" value="dewey" />
 					<label for="dewey">Dewey</label>
 				</div>
-				<button>Submit</button>
+				<button className="submit-btn">Submit</button>
 			</form>
 		</div>
 	);
