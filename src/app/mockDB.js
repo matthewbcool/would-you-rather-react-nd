@@ -22,7 +22,6 @@ const data = {
 			{
 				choiceOne: 'eat ramen',
 				choiceTwo: 'train with Rock Lee',
-				//below is an array of user names who voted on this question
 				choiceOneVotes: [],
 				choiceTwoVotes: [],
 			},
@@ -36,7 +35,6 @@ const data = {
 			{
 				choiceOne: 'study chemistry',
 				choiceTwo: 'study biology',
-				//below is an array of user names who voted on this question
 				choiceOneVotes: [],
 				choiceTwoVotes: [],
 			},
