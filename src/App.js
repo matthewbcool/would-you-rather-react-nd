@@ -4,6 +4,7 @@ import { Counter } from './features/counter/Counter';
 import Nav from './features/nav/Nav';
 import './App.css';
 import HomeScreen from './features/home/HomeScreen';
+import UnAnswered from './features/home/UnAnswered';
 import LeaderBoard from './features/leaderboard/LeaderBoard';
 import NewQuestion from './features/new_qestion/NewQuestion';
 import Login from './features/login/Login';
@@ -28,6 +29,7 @@ function App() {
 					<Route path="/login">
 						<Login />
 					</Route>
+
 					<Route path="*">
 						<NoMatch />
 					</Route>

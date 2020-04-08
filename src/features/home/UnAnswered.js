@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../home/home.css';
+
 const UnAnswered = (props) => {
+	const [answer, setAnswer] = useState('');
 	const onFormChange = (e) => {
-		console.log(e.target.value);
+		setAnswer(e.target.value);
 	};
 
+	const submit = (e) => {
+		e.preventDefault();
+		console.log(answer.toLowerCase().split(' ').join(''));
+	};
 	return (
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
@@ -12,16 +18,18 @@ const UnAnswered = (props) => {
 				<h3>{`${props.userName} asks:`}</h3>
 			</div>
 			<h2>Would you rather...</h2>
-			<form onChange={onFormChange}>
+			<form name="question" onSubmit={submit} onChange={onFormChange}>
 				<div className="input-item">
-					<input type="radio" id="huey" name="drone" value="huey" />
-					<label for="huey">wowwoowwoowo</label>
+					<input type="radio" id={props.choiceOne} name="question" value={props.choiceOne} />
+					<label htmlFor={props.choiceOne}>{props.choiceOne}</label>
 				</div>
 				<div className="input-item">
-					<input type="radio" id="dewey" name="drone" value="dewey" />
-					<label for="dewey">Dewey</label>
+					<input type="radio" id={props.choiceTwo} name="question" value={props.choiceTwo} />
+					<label htmlFor={props.choiceTwo}>{props.choiceTwo}</label>
 				</div>
-				<button className="submit-btn">Submit</button>
+				<button type="submit" className="submit-btn">
+					Submit
+				</button>
 			</form>
 		</div>
 	);

@@ -38,6 +38,12 @@ const data = {
 				choiceOneVotes: [],
 				choiceTwoVotes: [],
 			},
+			{
+				choiceOne: 'Marry Peter Parker',
+				choiceTwo: 'Marry Spiderman',
+				choiceOneVotes: [],
+				choiceTwoVotes: [],
+			},
 		],
 		answered: [],
 	},

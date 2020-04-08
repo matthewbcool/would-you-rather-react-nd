@@ -1,0 +1,10 @@
+.leaderboard-wrapper {
+	border: 1px solid black;
+}
+
+.leaderboard-item-wrapper {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-evenly;
+}
