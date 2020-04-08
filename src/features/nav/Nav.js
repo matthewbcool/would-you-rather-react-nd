@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { currentUser, isLoggedIn } from '../login/loginSlice';
+import { currentUser, isLoggedIn, currentUserObject } from '../login/loginSlice';
 import { useDispatch } from 'react-redux';
 import { setUser, toggleLogIn } from '../login/loginSlice';
 import './nav.css';
@@ -9,6 +9,7 @@ const Nav = () => {
 	const dispatch = useDispatch();
 	const userName = useSelector(currentUser);
 	const Logged = useSelector(isLoggedIn);
+	const userData = useSelector(currentUserObject);
 	const logout = () => {
 		dispatch(setUser(''));
 		dispatch(toggleLogIn());
@@ -36,7 +37,7 @@ const Nav = () => {
 							Signout
 						</button>
 						<p className="logout-menu-item">{userName}</p>
-						<img className="logout-menu-item" alt="user ninja profile" src="/images/user-ninja-solid.svg" />
+						<img className="logout-menu-item" alt="user ninja profile" src={userData.profile} />
 					</div>
 				)}
 			</div>

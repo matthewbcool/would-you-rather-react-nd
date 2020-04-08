@@ -1,9 +1,9 @@
 // At some point this could be a firestore db
 
-const data = {
-	megaman: {
+const data = [
+	{
 		user: 'Megaman',
-		profile: './public/images.mega-man.png',
+		profile: '/images/mega-man.png',
 		questions: [
 			{
 				choiceOne: 'adventure with Rush',
@@ -15,9 +15,9 @@ const data = {
 		],
 		answered: [],
 	},
-	naruto: {
+	{
 		user: 'Naruto',
-		profile: './public/images.naruto.png',
+		profile: '/images/naruto.png',
 		questions: [
 			{
 				choiceOne: 'eat ramen',
@@ -28,9 +28,9 @@ const data = {
 		],
 		answered: [],
 	},
-	gwenstacy: {
+	{
 		user: 'Gwen Stacy',
-		profile: './public/images.gwen-stacy.jpg',
+		profile: '/images/gwen-stacy.jpg',
 		questions: [
 			{
 				choiceOne: 'study chemistry',
@@ -47,4 +47,6 @@ const data = {
 		],
 		answered: [],
 	},
-};
+];
+
+export default data;
