@@ -24,8 +24,8 @@ export const slice = createSlice({
 			},
 			{
 				id: 'Naruto',
-				timeCreated: 1586536290702,
 				profile: '/images/naruto.png',
+				timeCreated: 1586536290702,
 				choiceOne: 'eat ramen',
 				choiceTwo: 'train with Rock Lee',
 				choiceOneVotes: [],

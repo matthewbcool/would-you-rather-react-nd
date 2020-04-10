@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import { currentUserObject } from '../login/loginSlice';
-import { useSelector } from 'react-redux';
-
+import { currentUnAnswered, addQuestionToUnAnswered } from '../home/homeSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 const CreateQestion = () => {
+	let history = useHistory();
+	const dispatch = useDispatch();
 	const currentUser = useSelector(currentUserObject);
+	let unAnswered = useSelector(currentUnAnswered);
 	const [choiceOne, setChoiceOne] = useState('');
 	const [choiceTwo, setChoiceTwo] = useState('');
 	const submitNewQuestion = (e) => {
@@ -17,8 +21,9 @@ const CreateQestion = () => {
 			choiceOneVotes: [],
 			choiceTwoVotes: [],
 		};
-
-		console.log(question);
+		let addQuestion = [...unAnswered, question];
+		dispatch(addQuestionToUnAnswered(addQuestion));
+		history.push('/');
 	};
 
 	const updateChoice = (e) => {
