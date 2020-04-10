@@ -1,12 +1,29 @@
 import React, { useState } from 'react';
 import DisplayAnswer from '../home/DisplayAnswer';
 import UnAnswered from '../home/UnAnswered';
+import { currentUnAnswered } from './homeSlice';
+import { useSelector } from 'react-redux';
 
 const HomeScreen = () => {
 	const [showAnswered, setShowAnswered] = useState(false);
 	const toggleAnswered = () => {
 		setShowAnswered(!showAnswered);
 	};
+	const unAnsweredQuestions = useSelector(currentUnAnswered);
+	const unAnswered = unAnsweredQuestions.map((question) => {
+		return (
+			<UnAnswered
+				key={question.timeCreated}
+				choiceOne={question.choiceOne}
+				choiceTwo={question.choiceTwo}
+				profile={question.profile}
+				userName={question.id}
+			/>
+		);
+	});
+
+	console.log(unAnswered);
+
 	return (
 		<div>
 			<h1>HOME</h1>
@@ -33,12 +50,7 @@ const HomeScreen = () => {
 					userName={'Gwen Stacy'}
 				/>
 			) : (
-				<UnAnswered
-					choiceOne="marry Spiderman"
-					choiceTwo="marry Peter Parker"
-					profile={'../images/gwen-stacy.jpg'}
-					userName={'Gwen Stacy'}
-				/>
+				<div>{unAnswered}</div>
 			)}
 		</div>
 	);
