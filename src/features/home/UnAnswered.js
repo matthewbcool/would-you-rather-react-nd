@@ -14,8 +14,8 @@ const UnAnswered = (props) => {
 	return (
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
-				<img className="profile-pic" src={props.profile} alt={`${props.userName}-asks`} />
 				<h3>{`${props.userName} asks:`}</h3>
+				<img className="profile-pic" src={props.profile} alt={`${props.userName}-asks`} />
 			</div>
 			<h2>Would you rather...</h2>
 			<form name="question" onSubmit={submit} onChange={onFormChange}>

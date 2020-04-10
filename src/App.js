@@ -20,7 +20,7 @@ function App() {
 					<PrivateRoute exact path="/">
 						<HomeScreen />
 					</PrivateRoute>
-					<PrivateRoute exact path="/new-question">
+					<PrivateRoute exact path="/add">
 						<NewQuestion />
 					</PrivateRoute>
 					<PrivateRoute path="/leaderboards">

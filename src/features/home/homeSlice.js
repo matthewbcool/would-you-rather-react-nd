@@ -47,20 +47,20 @@ export const slice = createSlice({
 		setUnansweredQuestions: (state, action) => {
 			state.unAnsweredQuestions = action.payload;
 		},
-		toggleLogIn: (state) => {
-			state.loggedIn = !state.loggedIn;
-		},
-		setUserObject: (state, action) => {
-			state.userObject = action.payload;
+		addQuestionToUnAnswered: (state, action) => {
+			state.unAnsweredQuestions = action.payload;
 		},
 	},
 });
 
-export const { setUnansweredQuestions } = slice.actions;
+export const { setUnansweredQuestions, addQuestionToUnAnswered } = slice.actions;
 
 //actions
 export const setCurrentUnAnswered = (home) => (dispatch) => {
 	dispatch(setUnansweredQuestions(home));
+};
+export const addQuestion = (home) => (dispatch) => {
+	dispatch(addQuestionToUnAnswered(home));
 };
 
 //exports
