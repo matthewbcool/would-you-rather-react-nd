@@ -44,3 +44,15 @@ form {
 	justify-content: flex-start;
 	width: 350px;
 }
+
+ul {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: row;
+	list-style: none;
+}
+
+.question-choice {
+	height: 48px;
+	width: 140px;
+}

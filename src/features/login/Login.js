@@ -26,6 +26,7 @@ const Login = () => {
 		dispatch(toggleLogIn());
 		history.replace(from);
 	};
+	//hard coded for now
 	const users = ['Megaman', 'Naruto', 'Gwen Stacy'];
 
 	return (
