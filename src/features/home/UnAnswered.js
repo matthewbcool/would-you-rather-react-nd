@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import '../home/home.css';
+import { BrowserRouter as Router, Switch, Route, Link, useParams, useHistory } from 'react-router-dom';
+import DisplayAnswer from './DisplayAnswer';
 
 const UnAnswered = (props) => {
+	const history = useHistory();
 	const [answer, setAnswer] = useState('');
 	const onFormChange = (e) => {
 		setAnswer(e.target.value);
@@ -9,7 +12,8 @@ const UnAnswered = (props) => {
 
 	const submit = (e) => {
 		e.preventDefault();
-		console.log(answer.toLowerCase().split(' ').join(''));
+		let id = answer.toLowerCase().split(' ').join('');
+		history.push(`/questions/${id}`);
 	};
 	return (
 		<div className="unanswered-wrapper">
@@ -30,7 +34,14 @@ const UnAnswered = (props) => {
 				<button type="submit" className="submit-btn">
 					Submit
 				</button>
+				<Link to="/questions/:id">Modus Create</Link>
 			</form>
+			<Switch>
+				<Route
+					path="/questions/:id"
+					children={<DisplayAnswer choiceOne={props.choiceOne} choiceTwo={props.choiceTwo} />}
+				/>
+			</Switch>
 		</div>
 	);
 };

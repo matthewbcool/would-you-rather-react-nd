@@ -6,16 +6,19 @@ const data = [
 		user: 'Megaman',
 		profile: '/images/mega-man.png',
 		answered: [],
+		questionCount: 1,
 	},
 	{
 		user: 'Naruto',
 		profile: '/images/naruto.png',
 		answered: [],
+		questionCount: 1,
 	},
 	{
 		user: 'Gwen Stacy',
 		profile: '/images/gwen-stacy.jpg',
 		answered: [],
+		questionCount: 2,
 	},
 	{
 		questions: [
