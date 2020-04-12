@@ -10,16 +10,24 @@ const UnAnswered = (props) => {
 	const [questionId, setQuestionId] = useState('');
 	const dispatch = useDispatch();
 	const answered = useSelector(currentAnswered);
+	const currentUnAnsweredArray = useSelector(currentUnAnswered);
 	const onFormChange = (e) => {
 		setAnswer(e.target.value);
 		setQuestionId(e.target.value.toLowerCase().split(' ').join(''));
 	};
 
-	const submit = (e) => {
-		console.log(e);
+	const filterOutCurrentQuestion = (question) => {
+		return currentUnAnsweredArray.filter((item) => item !== question);
+	};
 
+	const submit = (e) => {
 		//set this question to the answered array
 		dispatch(setAnsweredQuestions([...answered, props.questionObject]));
+
+		//remove the question from the unanswered group
+		let updatedUnAnswered = filterOutCurrentQuestion(props.questionObject);
+		//set updatedUnAnswered as new unanswered
+		dispatch(setCurrentUnAnswered(updatedUnAnswered));
 	};
 
 	return (
