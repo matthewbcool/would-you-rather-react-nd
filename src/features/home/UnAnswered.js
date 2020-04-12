@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
 import '../home/home.css';
-import { BrowserRouter as Router, Switch, Route, Link, useParams, useHistory } from 'react-router-dom';
-import DisplayAnswer from './DisplayAnswer';
+import { Link, useHistory } from 'react-router-dom';
+import { currentUnAnswered, setCurrentUnAnswered, setAnsweredQuestions, currentAnswered } from '../home/homeSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const UnAnswered = (props) => {
 	const history = useHistory();
 	const [answer, setAnswer] = useState('');
+	const [questionId, setQuestionId] = useState('');
+	const dispatch = useDispatch();
+	const answered = useSelector(currentAnswered);
 	const onFormChange = (e) => {
 		setAnswer(e.target.value);
+		setQuestionId(e.target.value.toLowerCase().split(' ').join(''));
 	};
 
 	const submit = (e) => {
-		e.preventDefault();
-		let id = answer.toLowerCase().split(' ').join('');
-		history.push(`/questions/${id}`);
+		console.log(e);
+
+		//set this question to the answered array
+		dispatch(setAnsweredQuestions([...answered, props.questionObject]));
 	};
+
 	return (
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
@@ -31,17 +38,12 @@ const UnAnswered = (props) => {
 					<input type="radio" id={props.choiceTwo} name="question" value={props.choiceTwo} />
 					<label htmlFor={props.choiceTwo}>{props.choiceTwo}</label>
 				</div>
-				<button type="submit" className="submit-btn">
-					Submit
-				</button>
-				<Link to="/questions/:id">Modus Create</Link>
+				<Link onClick={submit} to={`/questions/${questionId}`}>
+					<button type="submit" className="submit-btn">
+						Submit
+					</button>
+				</Link>
 			</form>
-			<Switch>
-				<Route
-					path="/questions/:id"
-					children={<DisplayAnswer choiceOne={props.choiceOne} choiceTwo={props.choiceTwo} />}
-				/>
-			</Switch>
 		</div>
 	);
 };

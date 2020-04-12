@@ -50,10 +50,13 @@ export const slice = createSlice({
 		addQuestionToUnAnswered: (state, action) => {
 			state.unAnsweredQuestions = action.payload;
 		},
+		setAnsweredQuestions: (state, action) => {
+			state.answeredQuestions = action.payload;
+		},
 	},
 });
 
-export const { setUnansweredQuestions, addQuestionToUnAnswered } = slice.actions;
+export const { setUnansweredQuestions, addQuestionToUnAnswered, setAnsweredQuestions } = slice.actions;
 
 //actions
 export const setCurrentUnAnswered = (home) => (dispatch) => {
@@ -62,8 +65,11 @@ export const setCurrentUnAnswered = (home) => (dispatch) => {
 export const addQuestion = (home) => (dispatch) => {
 	dispatch(addQuestionToUnAnswered(home));
 };
+export const updateAnsweredQuestions = (home) => (dispatch) => {
+	dispatch(setAnsweredQuestions(home));
+};
 
 //exports
 export const currentUnAnswered = (state) => state.home.unAnsweredQuestions;
-
+export const currentAnswered = (state) => state.home.answeredQuestions;
 export default slice.reducer;

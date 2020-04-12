@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import DisplayAnswer from '../home/DisplayAnswer';
+import React, { useState, Fragment } from 'react';
 import UnAnswered from '../home/UnAnswered';
 import { currentUnAnswered } from './homeSlice';
 import { useSelector } from 'react-redux';
@@ -11,6 +10,7 @@ const HomeScreen = () => {
 	};
 	const unAnsweredQuestions = useSelector(currentUnAnswered);
 	const unAnswered = unAnsweredQuestions.map((question) => {
+		console.log(question);
 		return (
 			<UnAnswered
 				key={question.timeCreated}
@@ -18,6 +18,7 @@ const HomeScreen = () => {
 				choiceTwo={question.choiceTwo}
 				profile={question.profile}
 				userName={question.id}
+				questionObject={question}
 			/>
 		);
 	});
@@ -42,16 +43,7 @@ const HomeScreen = () => {
 					</li>
 				)}
 			</ul>
-			{showAnswered ? (
-				<UnAnswered
-					choiceOne="answered"
-					choiceTwo="marry Peter Parker VOTED"
-					profile={'../images/gwen-stacy.jpg'}
-					userName={'Gwen Stacy'}
-				/>
-			) : (
-				<div>{unAnswered}</div>
-			)}
+			{showAnswered ? <Fragment></Fragment> : <Fragment>{unAnswered}</Fragment>}
 		</div>
 	);
 };

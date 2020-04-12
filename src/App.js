@@ -10,6 +10,7 @@ import NewQuestion from './features/new_qestion/NewQuestion';
 import Login from './features/login/Login';
 import PrivateRoute from './features/private_route/PrivateRoute';
 import NoMatch from './features/no_match_route/NoMatch';
+import DisplayAnswer from './features/home/DisplayAnswer';
 
 function App() {
 	return (
@@ -26,6 +27,8 @@ function App() {
 					<PrivateRoute path="/leaderboards">
 						<LeaderBoard />
 					</PrivateRoute>
+					<PrivateRoute path="/questions/:id" component={DisplayAnswer} />
+
 					<Route path="/login">
 						<Login />
 					</Route>
