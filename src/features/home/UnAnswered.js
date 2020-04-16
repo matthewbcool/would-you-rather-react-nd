@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import '../home/home.css';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { currentUnAnswered, setCurrentUnAnswered, setAnsweredQuestions, currentAnswered } from '../home/homeSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UnAnswered = (props) => {
-	const history = useHistory();
 	const [answer, setAnswer] = useState('');
 	const [questionId, setQuestionId] = useState('');
 	const dispatch = useDispatch();
@@ -21,12 +20,8 @@ const UnAnswered = (props) => {
 	};
 
 	const submit = (e) => {
-		//set this question to the answered array
 		dispatch(setAnsweredQuestions([...answered, props.questionObject]));
-
-		//remove the question from the unanswered group
 		let updatedUnAnswered = filterOutCurrentQuestion(props.questionObject);
-		//set updatedUnAnswered as new unanswered
 		dispatch(setCurrentUnAnswered(updatedUnAnswered));
 	};
 

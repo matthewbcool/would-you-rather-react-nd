@@ -7,28 +7,50 @@ import { Link } from 'react-router-dom';
 const DisplayAnswer = (props) => {
 	let { id } = useParams();
 	let answered = useSelector(currentAnswered);
-	console.log(answered);
+	let answerData = id
+		? {
+				profile: props.profile,
+				userName: props.userName,
+				choiceOne: props.choiceOne,
+				choiceTwo: props.choiceTwo,
+				backBtn: true,
+		  }
+		: {
+				profile: props.profile,
+				userName: props.userName,
+				choiceOne: props.choiceOne,
+				choiceTwo: props.choiceTwo,
+				backBtn: false,
+		  };
 	return (
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
-				<h3>{`${props.userName} asks:`}</h3>
-				<img className="profile-pic" src={props.profile} alt={`${props.userName}-asks`} />
+				<h3>{`${answerData.userName} asks:`}</h3>
+				<img className="profile-pic" src={answerData.profile} alt={`${answerData.userName}-asks`} />
 			</div>
 			<h2>Would you rather...</h2>
 			<form name="question">
 				<div className="input-item">
-					<input type="radio" id={props.choiceOne} name="question" value={props.choiceOne} />
-					<label htmlFor={props.choiceOne}>{props.choiceOne}</label>
+					<input type="radio" id={answerData.choiceOne} name="question" value={answerData.choiceOne} />
+					<label htmlFor={answerData.choiceOne}>{answerData.choiceOne}</label>
 				</div>
 				<div className="input-item">
-					<input type="radio" id={props.choiceTwo} name="question" value={props.choiceTwo} />
-					<label htmlFor={props.choiceTwo}>{props.choiceTwo}</label>
+					<input type="radio" id={answerData.choiceTwo} name="question" value={answerData.choiceTwo} />
+					<label htmlFor={answerData.choiceTwo}>{answerData.choiceTwo}</label>
 				</div>
-				<Link to={`/`}>
-					<button type="submit" className="submit-btn">
-						Back
-					</button>
-				</Link>
+				{answerData.backBtn ? (
+					<Link to={`/`}>
+						<button type="submit" className="submit-btn">
+							Back
+						</button>
+					</Link>
+				) : (
+					<Link to={`/questions/${id}`}>
+						<button type="submit" className="submit-btn">
+							View Poll
+						</button>
+					</Link>
+				)}
 			</form>
 		</div>
 	);
