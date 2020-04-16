@@ -10,7 +10,7 @@ export const slice = createSlice({
 				timeCreated: 1586536290703,
 				choiceOne: 'study chemistry',
 				choiceTwo: 'study biology',
-				choiceOneVotes: [],
+				choiceOneVotes: ['Naruto'],
 				choiceTwoVotes: [],
 			},
 			{

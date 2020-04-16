@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../home/home.css';
 import { Link } from 'react-router-dom';
 import { currentUnAnswered, setCurrentUnAnswered, setAnsweredQuestions, currentAnswered } from '../home/homeSlice';
+import { currentUser, isLoggedIn, currentUserObject } from '../login/loginSlice';
+import { setUser } from '../login/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UnAnswered = (props) => {
@@ -9,6 +11,8 @@ const UnAnswered = (props) => {
 	const [questionId, setQuestionId] = useState('');
 	const dispatch = useDispatch();
 	const answered = useSelector(currentAnswered);
+	const userObj = useSelector(currentUserObject);
+	const user = useSelector(currentUser);
 	const currentUnAnsweredArray = useSelector(currentUnAnswered);
 	const onFormChange = (e) => {
 		setAnswer(e.target.value);
@@ -20,9 +24,15 @@ const UnAnswered = (props) => {
 	};
 
 	const submit = (e) => {
-		dispatch(setAnsweredQuestions([...answered, props.questionObject]));
 		let updatedUnAnswered = filterOutCurrentQuestion(props.questionObject);
 		dispatch(setCurrentUnAnswered(updatedUnAnswered));
+		//if the answer is equal to choice one push the name of the user to choice one, if not push to choice two
+		let updateQuestionObject = { ...props.questionObject };
+		if (props.choiceOne === answer) {
+			updateQuestionObject.choiceOneVotes = [...updateQuestionObject.choiceOneVotes, user];
+			console.log(updateQuestionObject);
+		}
+		dispatch(setAnsweredQuestions([...answered, updateQuestionObject]));
 	};
 
 	return (
