@@ -6,18 +6,21 @@ const data = [
 		user: 'Megaman',
 		profile: '/images/mega-man.png',
 		answers: [],
+		toAnswer: [],
 		questionCount: 1,
 	},
 	{
 		user: 'Naruto',
 		profile: '/images/naruto.png',
 		answers: [],
+		toAnswer: [],
 		questionCount: 1,
 	},
 	{
 		user: 'Gwen Stacy',
 		profile: '/images/gwen-stacy.jpg',
 		answers: [],
+		toAnswer: [],
 		questionCount: 2,
 	},
 	{

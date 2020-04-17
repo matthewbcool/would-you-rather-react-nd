@@ -20,10 +20,13 @@ export const slice = createSlice({
 		setAnsweredQuestions: (state, action) => {
 			state.userObject.answers = action.payload;
 		},
+		setUnAnsweredQuestions: (state, action) => {
+			state.userObject.toAnswer = action.payload;
+		},
 	},
 });
 
-export const { toggleLogIn, setUser, setUserObject, setAnsweredQuestions } = slice.actions;
+export const { toggleLogIn, setUser, setUserObject, setAnsweredQuestions, setUnAnsweredQuestions } = slice.actions;
 
 //actions
 export const setCurrentUser = (user) => (dispatch) => {
@@ -35,11 +38,15 @@ export const setCurrentUserObject = (user) => (dispatch) => {
 export const updateAnsweredQuestions = (user) => (dispatch) => {
 	dispatch(setAnsweredQuestions(user));
 };
+export const updateUnAnsweredQuestions = (user) => (dispatch) => {
+	dispatch(setUnAnsweredQuestions(user));
+};
 
 //exports
 export const currentUser = (state) => state.user.current;
 export const isLoggedIn = (state) => state.user.loggedIn;
 export const currentUserObject = (state) => state.user.userObject;
 export const answers = (state) => state.user.userObject.answers;
+export const toAnswer = (state) => state.user.userObject.toAnswer;
 
 export default slice.reducer;

@@ -29,7 +29,7 @@ const DisplayAnswer = (props) => {
 			}
 		});
 	};
-
+	findThisAnswer()
 	console.log(userObj);
 
 	const setVoteForAnsweredList = () => {
