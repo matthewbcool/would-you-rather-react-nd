@@ -9,9 +9,30 @@ const LeaderBoard = () => {
 
 	let leaderBoardItems = [];
 
-	users.forEach((user) => {
+	let getScore = (userObj) => {
+		let answers = userObj.answers.length;
+		let questions = userObj.questionCount;
+		return answers + questions;
+	};
+
+	const rankUsers = (users) => {
+		let highest = 0;
+		let rankedUserArray = [];
+		users.forEach((user) => {
+			if (getScore(user) > highest);
+			{
+				rankedUserArray.unshift(user);
+			}
+		});
+		return rankedUserArray;
+	};
+
+	let rankedUsers = rankUsers(users);
+
+	rankedUsers.forEach((user) => {
 		leaderBoardItems.push(
 			<LeaderBoardItem
+				key={user.user}
 				userName={user.user}
 				profile={user.profile}
 				numQuestions={user.questionCount}
@@ -20,7 +41,6 @@ const LeaderBoard = () => {
 		);
 	});
 
-	const userObj = useSelector(currentUserObject);
 	return (
 		<div className="leaderboard-wrapper">
 			<h1>LeaderBoard</h1>
