@@ -1,15 +1,16 @@
 import React, { Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import { currentUnAnswered, setCurrentUnAnswered, setAnsweredQuestions, currentAnswered } from '../home/homeSlice';
-import { currentUser, isLoggedIn, currentUserObject } from '../login/loginSlice';
+import { currentUnAnswered, setCurrentUnAnswered } from '../home/homeSlice';
+import { currentUser, currentUserObject, isLoggedIn, answers } from '../login/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const DisplayAnswer = (props) => {
 	let { id } = useParams();
 	let dispatch = useDispatch();
-	let answered = useSelector(currentAnswered);
+	let answered = useSelector(answers);
 	let user = useSelector(currentUser);
+	let userObj = useSelector(currentUserObject);
 	let votes = { one: 0, two: 0 };
 	let userChoice = '';
 	let currentQuestion = {};
@@ -28,7 +29,8 @@ const DisplayAnswer = (props) => {
 			}
 		});
 	};
-	findThisAnswer();
+
+	console.log(userObj);
 
 	const setVoteForAnsweredList = () => {
 		let choiceOneVotes = props.questionObject.choiceOneVotes;
@@ -80,7 +82,7 @@ const DisplayAnswer = (props) => {
 				<div className="input-item">
 					{answerData.pollMode ? (
 						<Fragment>
-							<h2>{answerData.choiceOne}</h2>
+							<h4 className={choiceOneSelected ? 'selected' : ''}>{answerData.choiceOne}</h4>
 							{choiceOneSelected ? <span className="poll-choice-text">{'<--- You voted!'}</span> : null}
 						</Fragment>
 					) : (
@@ -100,7 +102,7 @@ const DisplayAnswer = (props) => {
 				<div className="input-item">
 					{answerData.pollMode ? (
 						<Fragment>
-							<h2>{answerData.choiceTwo}</h2>{' '}
+							<h4 className={choiceOneSelected ? '' : 'selected'}>{answerData.choiceTwo}</h4>{' '}
 							{choiceOneSelected ? null : <span className="poll-choice-text">{'<--- You voted!'}</span>}
 						</Fragment>
 					) : (

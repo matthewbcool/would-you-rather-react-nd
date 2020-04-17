@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import '../home/home.css';
 import { Link } from 'react-router-dom';
-import { currentUnAnswered, setCurrentUnAnswered, setAnsweredQuestions, currentAnswered } from '../home/homeSlice';
-import { currentUser, isLoggedIn, currentUserObject } from '../login/loginSlice';
-import { setUser } from '../login/loginSlice';
+import { currentUnAnswered, setCurrentUnAnswered } from '../home/homeSlice';
+import {
+	setUser,
+	currentUser,
+	isLoggedIn,
+	currentUserObject,
+	answers,
+	updateAnsweredQuestions,
+} from '../login/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UnAnswered = (props) => {
 	const [answer, setAnswer] = useState('');
 	const [questionId, setQuestionId] = useState('');
 	const dispatch = useDispatch();
-	const answered = useSelector(currentAnswered);
-	const userObj = useSelector(currentUserObject);
+	const answersArray = useSelector(answers);
 	const user = useSelector(currentUser);
+	const currentUserObj = useSelector(currentUserObject);
 	const currentUnAnsweredArray = useSelector(currentUnAnswered);
 	const onFormChange = (e) => {
 		setAnswer(e.target.value);
@@ -30,9 +36,13 @@ const UnAnswered = (props) => {
 		let updateQuestionObject = { ...props.questionObject };
 		if (props.choiceOne === answer) {
 			updateQuestionObject.choiceOneVotes = [...updateQuestionObject.choiceOneVotes, user];
-			console.log(updateQuestionObject);
 		}
-		dispatch(setAnsweredQuestions([...answered, updateQuestionObject]));
+		if (props.choiceTwo === answer) {
+			updateQuestionObject.choiceTwoVotes = [...updateQuestionObject.choiceTwoVotes, user];
+		}
+		console.log(updateQuestionObject);
+		dispatch(updateAnsweredQuestions([...answersArray, updateQuestionObject]));
+		console.log(currentUserObj);
 	};
 
 	return (

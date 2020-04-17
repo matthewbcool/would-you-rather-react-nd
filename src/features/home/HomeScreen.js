@@ -1,6 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import UnAnswered from '../home/UnAnswered';
-import { currentUnAnswered, currentAnswered } from './homeSlice';
+import { currentUnAnswered } from './homeSlice';
+import { answers } from '../login/loginSlice';
 import { useSelector } from 'react-redux';
 import DisplayAnswer from '../home/DisplayAnswer';
 
@@ -10,7 +11,8 @@ const HomeScreen = () => {
 		setShowAnswered(!showAnswered);
 	};
 	const unAnsweredQuestions = useSelector(currentUnAnswered);
-	const AnsweredQuestions = useSelector(currentAnswered);
+	const AnsweredQuestions = useSelector(answers);
+	console.log(AnsweredQuestions);
 
 	const Answered = AnsweredQuestions.map((question) => {
 		return (
@@ -37,8 +39,6 @@ const HomeScreen = () => {
 			/>
 		);
 	});
-
-	console.log(unAnswered);
 
 	return (
 		<div>

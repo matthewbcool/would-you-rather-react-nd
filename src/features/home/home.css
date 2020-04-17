@@ -47,6 +47,9 @@ form {
 	justify-content: flex-start;
 	width: 350px;
 }
+.selected {
+	background-color: lightgreen;
+}
 
 ul {
 	display: flex;

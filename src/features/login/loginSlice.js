@@ -4,7 +4,7 @@ export const slice = createSlice({
 	name: 'user',
 	initialState: {
 		current: 'nouser',
-		userObject: { profile: './public/images.naruto.png' },
+		userObject: { profile: './public/images.naruto.png', answers: [] },
 		loggedIn: false,
 	},
 	reducers: {
@@ -17,10 +17,13 @@ export const slice = createSlice({
 		setUserObject: (state, action) => {
 			state.userObject = action.payload;
 		},
+		setAnsweredQuestions: (state, action) => {
+			state.userObject.answers = action.payload;
+		},
 	},
 });
 
-export const { toggleLogIn, setUser, setUserObject } = slice.actions;
+export const { toggleLogIn, setUser, setUserObject, setAnsweredQuestions } = slice.actions;
 
 //actions
 export const setCurrentUser = (user) => (dispatch) => {
@@ -29,10 +32,14 @@ export const setCurrentUser = (user) => (dispatch) => {
 export const setCurrentUserObject = (user) => (dispatch) => {
 	dispatch(setUserObject(user));
 };
+export const updateAnsweredQuestions = (user) => (dispatch) => {
+	dispatch(setAnsweredQuestions(user));
+};
 
 //exports
 export const currentUser = (state) => state.user.current;
 export const isLoggedIn = (state) => state.user.loggedIn;
 export const currentUserObject = (state) => state.user.userObject;
+export const answers = (state) => state.user.userObject.answers;
 
 export default slice.reducer;

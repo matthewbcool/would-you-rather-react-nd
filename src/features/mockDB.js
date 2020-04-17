@@ -5,19 +5,19 @@ const data = [
 	{
 		user: 'Megaman',
 		profile: '/images/mega-man.png',
-		answered: [],
+		answers: [],
 		questionCount: 1,
 	},
 	{
 		user: 'Naruto',
 		profile: '/images/naruto.png',
-		answered: [],
+		answers: [],
 		questionCount: 1,
 	},
 	{
 		user: 'Gwen Stacy',
 		profile: '/images/gwen-stacy.jpg',
-		answered: [],
+		answers: [],
 		questionCount: 2,
 	},
 	{

@@ -41,7 +41,6 @@ export const slice = createSlice({
 				choiceTwoVotes: [],
 			},
 		],
-		answeredQuestions: [],
 	},
 	reducers: {
 		setUnansweredQuestions: (state, action) => {
@@ -49,9 +48,6 @@ export const slice = createSlice({
 		},
 		addQuestionToUnAnswered: (state, action) => {
 			state.unAnsweredQuestions = action.payload;
-		},
-		setAnsweredQuestions: (state, action) => {
-			state.answeredQuestions = action.payload;
 		},
 	},
 });
@@ -64,9 +60,6 @@ export const setCurrentUnAnswered = (home) => (dispatch) => {
 };
 export const addQuestion = (home) => (dispatch) => {
 	dispatch(addQuestionToUnAnswered(home));
-};
-export const updateAnsweredQuestions = (home) => (dispatch) => {
-	dispatch(setAnsweredQuestions(home));
 };
 
 //exports
