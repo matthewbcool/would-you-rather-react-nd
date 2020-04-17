@@ -19,9 +19,10 @@ const LeaderBoard = () => {
 		let highest = 0;
 		let rankedUserArray = [];
 		users.forEach((user) => {
-			if (getScore(user) > highest);
-			{
+			if (getScore(user) > highest) {
 				rankedUserArray.unshift(user);
+			} else {
+				rankedUserArray.push(user);
 			}
 		});
 		return rankedUserArray;

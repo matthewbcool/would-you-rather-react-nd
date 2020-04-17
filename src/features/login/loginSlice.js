@@ -4,7 +4,7 @@ export const slice = createSlice({
 	name: 'user',
 	initialState: {
 		current: 'nouser',
-		userObject: { profile: './public/images.naruto.png', answers: [] },
+		userObject: { profile: './public/images.naruto.png', answers: [], questionCount: 0 },
 		loggedIn: false,
 	},
 	reducers: {
@@ -23,10 +23,20 @@ export const slice = createSlice({
 		setUnAnsweredQuestions: (state, action) => {
 			state.userObject.toAnswer = action.payload;
 		},
+		addToQuestionCount: (state) => {
+			state.userObject.questionCount += 1;
+		},
 	},
 });
 
-export const { toggleLogIn, setUser, setUserObject, setAnsweredQuestions, setUnAnsweredQuestions } = slice.actions;
+export const {
+	toggleLogIn,
+	setUser,
+	setUserObject,
+	setAnsweredQuestions,
+	setUnAnsweredQuestions,
+	addToQuestionCount,
+} = slice.actions;
 
 //actions
 export const setCurrentUser = (user) => (dispatch) => {

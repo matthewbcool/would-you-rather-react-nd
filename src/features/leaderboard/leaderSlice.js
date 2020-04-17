@@ -9,21 +9,21 @@ export const slice = createSlice({
 				profile: '/images/mega-man.png',
 				answers: [],
 				toAnswer: [],
-				questionCount: 1,
+				questionCount: 0,
 			},
 			{
 				user: 'Naruto',
 				profile: '/images/naruto.png',
 				answers: [],
 				toAnswer: [],
-				questionCount: 1,
+				questionCount: 0,
 			},
 			{
 				user: 'Gwen Stacy',
 				profile: '/images/gwen-stacy.jpg',
 				answers: [],
 				toAnswer: [],
-				questionCount: 2,
+				questionCount: 0,
 			},
 		],
 	},
@@ -37,8 +37,17 @@ export const slice = createSlice({
 export const { setLeaderboard } = slice.actions;
 
 //actions
-export const updateLeaderBoard = (leaderboard) => (dispatch) => {
-	dispatch(setLeaderboard(leaderboard));
+export const updateLeaderBoard = (userObjects, currentUserObject) => (dispatch) => {
+	let updatedUserObjects = [];
+	userObjects.forEach((userObject) => {
+		if (currentUserObject.user === userObject.user) {
+			updatedUserObjects.push(currentUserObject);
+		} else {
+			updatedUserObjects.push(userObject);
+		}
+	});
+	console.log(updatedUserObjects);
+	dispatch(setLeaderboard(updatedUserObjects));
 };
 
 //exports

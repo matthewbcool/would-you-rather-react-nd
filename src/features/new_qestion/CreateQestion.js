@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { currentUserObject } from '../login/loginSlice';
+import { currentUserObject, addToQuestionCount } from '../login/loginSlice';
 import { currentUnAnswered, addQuestionToUnAnswered } from '../home/homeSlice';
+import { updateLeaderBoard, userObjects } from '../leaderboard/leaderSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
 const CreateQestion = () => {
 	let history = useHistory();
 	const dispatch = useDispatch();
 	const currentUser = useSelector(currentUserObject);
+	let globalUserObjects = useSelector(userObjects);
 	let unAnswered = useSelector(currentUnAnswered);
 	const [choiceOne, setChoiceOne] = useState('');
 	const [choiceTwo, setChoiceTwo] = useState('');
 	const submitNewQuestion = (e) => {
 		e.preventDefault();
+		dispatch(addToQuestionCount());
 		let question = {
 			id: currentUser.user,
 			profile: currentUser.profile,
@@ -23,6 +27,7 @@ const CreateQestion = () => {
 		};
 		let addQuestion = [...unAnswered, question];
 		dispatch(addQuestionToUnAnswered(addQuestion));
+		dispatch(updateLeaderBoard(globalUserObjects, currentUser));
 		history.push('/');
 	};
 

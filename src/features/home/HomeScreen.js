@@ -1,7 +1,7 @@
 import React, { useState, Fragment } from 'react';
 import UnAnswered from '../home/UnAnswered';
 import { currentUnAnswered } from './homeSlice';
-import { answers } from '../login/loginSlice';
+import { answers, currentUserObject } from '../login/loginSlice';
 import { useSelector } from 'react-redux';
 import DisplayAnswer from '../home/DisplayAnswer';
 
@@ -12,8 +12,9 @@ const HomeScreen = () => {
 	};
 	const unAnsweredQuestions = useSelector(currentUnAnswered);
 	const AnsweredQuestions = useSelector(answers);
+	const currentUser = useSelector(currentUserObject);
 	console.log(AnsweredQuestions);
-
+	console.log(currentUser);
 	const Answered = AnsweredQuestions.map((question) => {
 		return (
 			<DisplayAnswer
