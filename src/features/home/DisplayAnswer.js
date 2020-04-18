@@ -29,7 +29,7 @@ const DisplayAnswer = (props) => {
 			}
 		});
 	};
-	findThisAnswer()
+	findThisAnswer();
 	console.log(userObj);
 
 	const setVoteForAnsweredList = () => {
@@ -71,6 +71,9 @@ const DisplayAnswer = (props) => {
 				choiceTwo: props.choiceTwo,
 				pollMode: false,
 		  };
+
+	let choiceOneVotes = currentQuestion.choiceOneVotes.length > 0 ? currentQuestion.choiceOneVotes.length : 0;
+	let choiceTwoVotes = currentQuestion.choiceTwoVotes.length > 0 ? currentQuestion.choiceTwoVotes.length : 0;
 	return (
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
@@ -83,7 +86,14 @@ const DisplayAnswer = (props) => {
 					{answerData.pollMode ? (
 						<Fragment>
 							<h4 className={choiceOneSelected ? 'selected' : ''}>{answerData.choiceOne}</h4>
-							{choiceOneSelected ? <span className="poll-choice-text">{'<--- You voted!'}</span> : null}
+							{choiceOneSelected ? (
+								<Fragment>
+									<span className="poll-choice-text">{'<--- You voted!'}</span>
+									<span className="votes">Votes: {choiceOneVotes}</span>
+								</Fragment>
+							) : (
+								<span className="votes">Votes: {choiceOneVotes}</span>
+							)}
 						</Fragment>
 					) : (
 						<Fragment>
@@ -103,7 +113,14 @@ const DisplayAnswer = (props) => {
 					{answerData.pollMode ? (
 						<Fragment>
 							<h4 className={choiceOneSelected ? '' : 'selected'}>{answerData.choiceTwo}</h4>{' '}
-							{choiceOneSelected ? null : <span className="poll-choice-text">{'<--- You voted!'}</span>}
+							{choiceOneSelected ? (
+								<span className="votes">Votes: {choiceTwoVotes}</span>
+							) : (
+								<Fragment>
+									<span className="poll-choice-text">{'<--- You voted!'}</span>
+									<span className="votes">Votes: {choiceTwoVotes}</span>
+								</Fragment>
+							)}
 						</Fragment>
 					) : (
 						<Fragment>
