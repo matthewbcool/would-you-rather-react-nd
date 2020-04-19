@@ -1,27 +1,27 @@
-import React, { Fragment } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { Fragment, useState } from 'react';
+import { useParams, Link, useHistory } from 'react-router-dom';
 import { currentUnAnswered, setCurrentUnAnswered } from '../home/homeSlice';
 import { currentUser, currentUserObject, isLoggedIn, answers } from '../login/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const DisplayAnswer = (props) => {
 	let { id } = useParams();
 	let dispatch = useDispatch();
+	const [checkedQuestion, setCheckedQuestion] = useState('');
+	let history = useHistory();
 	let answered = useSelector(answers);
 	let user = useSelector(currentUser);
 	let userObj = useSelector(currentUserObject);
+	//redirect to login if nobody is logged in
+	if (userObj.profile === '') {
+		history.push('/');
+	}
 	let votes = { one: 0, two: 0 };
 	let userChoice = '';
 	let currentQuestion = {};
 	let choiceOneSelected = true;
-	const submit = (e) => {
-		console.log(inputs);
-		for (let input in inputs) {
-			console.log(typeof input);
-		}
-	};
-	console.log(props.questionObject);
+	const submit = (e) => {};
+	console.log(userObj);
 	const findThisAnswer = () => {
 		//loop threw the choices in answered to find the string that matches the id
 		answered.forEach((answer) => {
@@ -37,9 +37,7 @@ const DisplayAnswer = (props) => {
 		});
 	};
 	findThisAnswer();
-	console.log(userObj);
-	console.log(currentQuestion);
-	console.log(id);
+	//grab the checked answer and log it
 
 	const setVoteForAnsweredList = () => {
 		let choiceOneVotes = props.questionObject.choiceOneVotes;
@@ -70,8 +68,8 @@ const DisplayAnswer = (props) => {
 				userName: currentQuestion.id,
 				choiceOne: currentQuestion.choiceOne,
 				choiceTwo: currentQuestion.choiceTwo,
-				choiceOneVotes: currentQuestion.choiceOneVotes.length > 0 ? currentQuestion.choiceOneVotes.length : 0,
-				choiceTwoVotes: currentQuestion.choiceTwoVotes.length > 0 ? currentQuestion.choiceTwoVotes.length : 0,
+				choiceOneVotes: 'votes',
+				choiceTwoVotes: 'votes',
 				pollMode: true,
 		  }
 		: {

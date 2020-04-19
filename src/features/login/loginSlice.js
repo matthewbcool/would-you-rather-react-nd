@@ -4,7 +4,7 @@ export const slice = createSlice({
 	name: 'user',
 	initialState: {
 		current: 'nouser',
-		userObject: { profile: './public/images.naruto.png', answers: [], questionCount: 0 },
+		userObject: { profile: '', answers: [], questionCount: 0 },
 		loggedIn: false,
 	},
 	reducers: {

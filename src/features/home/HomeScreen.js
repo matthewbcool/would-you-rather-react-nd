@@ -42,7 +42,6 @@ const HomeScreen = () => {
 
 	return (
 		<div>
-			<h1>HOME</h1>
 			<ul>
 				{showAnswered ? (
 					<li>
