@@ -40,9 +40,8 @@ const UnAnswered = (props) => {
 		if (props.choiceTwo === answer) {
 			updateQuestionObject.choiceTwoVotes = [...updateQuestionObject.choiceTwoVotes, user];
 		}
-		console.log(updateQuestionObject);
+
 		dispatch(updateAnsweredQuestions([...answersArray, updateQuestionObject]));
-		console.log(currentUserObj);
 	};
 
 	return (

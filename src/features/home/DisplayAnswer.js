@@ -15,6 +15,13 @@ const DisplayAnswer = (props) => {
 	let userChoice = '';
 	let currentQuestion = {};
 	let choiceOneSelected = true;
+	const submit = (e) => {
+		console.log(inputs);
+		for (let input in inputs) {
+			console.log(typeof input);
+		}
+	};
+	console.log(props.questionObject);
 	const findThisAnswer = () => {
 		//loop threw the choices in answered to find the string that matches the id
 		answered.forEach((answer) => {
@@ -31,6 +38,8 @@ const DisplayAnswer = (props) => {
 	};
 	findThisAnswer();
 	console.log(userObj);
+	console.log(currentQuestion);
+	console.log(id);
 
 	const setVoteForAnsweredList = () => {
 		let choiceOneVotes = props.questionObject.choiceOneVotes;
@@ -49,7 +58,6 @@ const DisplayAnswer = (props) => {
 				userChoice = 'two';
 			}
 		});
-		console.log(userChoice);
 	};
 	if (props.questionObject) {
 		//set if we are in the view answer list
@@ -62,6 +70,8 @@ const DisplayAnswer = (props) => {
 				userName: currentQuestion.id,
 				choiceOne: currentQuestion.choiceOne,
 				choiceTwo: currentQuestion.choiceTwo,
+				choiceOneVotes: currentQuestion.choiceOneVotes.length > 0 ? currentQuestion.choiceOneVotes.length : 0,
+				choiceTwoVotes: currentQuestion.choiceTwoVotes.length > 0 ? currentQuestion.choiceTwoVotes.length : 0,
 				pollMode: true,
 		  }
 		: {
@@ -72,8 +82,6 @@ const DisplayAnswer = (props) => {
 				pollMode: false,
 		  };
 
-	let choiceOneVotes = currentQuestion.choiceOneVotes.length > 0 ? currentQuestion.choiceOneVotes.length : 0;
-	let choiceTwoVotes = currentQuestion.choiceTwoVotes.length > 0 ? currentQuestion.choiceTwoVotes.length : 0;
 	return (
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
@@ -81,7 +89,7 @@ const DisplayAnswer = (props) => {
 				<img className="profile-pic" src={answerData.profile} alt={`${answerData.userName}-asks`} />
 			</div>
 			<h2>Would you rather...</h2>
-			<form name="question">
+			<form name="question" onSubmit={submit}>
 				<div className="input-item">
 					{answerData.pollMode ? (
 						<Fragment>
@@ -89,10 +97,10 @@ const DisplayAnswer = (props) => {
 							{choiceOneSelected ? (
 								<Fragment>
 									<span className="poll-choice-text">{'<--- You voted!'}</span>
-									<span className="votes">Votes: {choiceOneVotes}</span>
+									<span className="votes">Votes: {answerData.choiceOneVotes}</span>
 								</Fragment>
 							) : (
-								<span className="votes">Votes: {choiceOneVotes}</span>
+								<span className="votes">Votes: {answerData.choiceOneVotes}</span>
 							)}
 						</Fragment>
 					) : (
@@ -114,11 +122,11 @@ const DisplayAnswer = (props) => {
 						<Fragment>
 							<h4 className={choiceOneSelected ? '' : 'selected'}>{answerData.choiceTwo}</h4>{' '}
 							{choiceOneSelected ? (
-								<span className="votes">Votes: {choiceTwoVotes}</span>
+								<span className="votes">Votes: {answerData.choiceTwoVotes}</span>
 							) : (
 								<Fragment>
 									<span className="poll-choice-text">{'<--- You voted!'}</span>
-									<span className="votes">Votes: {choiceTwoVotes}</span>
+									<span className="votes">Votes: {answerData.choiceTwoVotes}</span>
 								</Fragment>
 							)}
 						</Fragment>
@@ -144,7 +152,7 @@ const DisplayAnswer = (props) => {
 					</Link>
 				) : (
 					<Link to={`/questions/${id}`}>
-						<button type="submit" className="submit-btn">
+						<button onClick={submit} type="submit" className="submit-btn">
 							View Poll
 						</button>
 					</Link>
