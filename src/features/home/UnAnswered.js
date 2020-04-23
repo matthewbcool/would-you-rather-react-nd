@@ -2,15 +2,7 @@ import React, { useState } from 'react';
 import '../home/home.css';
 import { Link } from 'react-router-dom';
 import { currentUnAnswered, setCurrentUnAnswered, setCurrentPollAnswer } from '../home/homeSlice';
-import {
-	setUser,
-	currentUser,
-	isLoggedIn,
-	currentUserObject,
-	answers,
-	updateAnsweredQuestions,
-	setCurrentUserObject,
-} from '../login/loginSlice';
+import { currentUser, currentUserObject, answers, updateAnsweredQuestions } from '../login/loginSlice';
 import { updateLeaderBoard, userObjects } from '../leaderboard/leaderSlice';
 import { useDispatch, useSelector } from 'react-redux';
 

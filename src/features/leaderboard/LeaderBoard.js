@@ -13,20 +13,27 @@ const LeaderBoard = () => {
 		return answers + questions;
 	};
 
-	const rankUsers = (users) => {
-		let highest = 0;
-		let rankedUserArray = [];
+	const scoreUsers = (users) => {
+		let scoredUserArray = [];
 		users.forEach((user) => {
-			if (getScore(user) > highest) {
-				rankedUserArray.unshift(user);
-			} else {
-				rankedUserArray.push(user);
-			}
+			let userWithScore = { ...user };
+			userWithScore.score = getScore(user);
+			scoredUserArray.push(userWithScore);
 		});
-		return rankedUserArray;
+		console.log(scoredUserArray);
+		return scoredUserArray;
 	};
+	let scoredUsers = scoreUsers(users);
 
-	let rankedUsers = rankUsers(users);
+	let rankedUsers = scoredUsers.sort((a, b) => {
+		let comparison = 0;
+		if (a.score < b.score) {
+			comparison = 1;
+		} else if (a.score > b.score) {
+			comparison = -1;
+		}
+		return comparison;
+	});
 
 	rankedUsers.forEach((user) => {
 		leaderBoardItems.push(
