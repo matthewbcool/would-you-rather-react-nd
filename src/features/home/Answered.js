@@ -8,10 +8,12 @@ const Answered = (props) => {
 	const [questionId, setQuestionId] = useState('');
 	const dispatch = useDispatch();
 
-	useEffect((props) => {
-		setQuestionId(props.questionObject.answerId);
+	useEffect(() => {
+		getId();
 	}, []);
-
+	const getId = () => {
+		setQuestionId(props.questionObject.answerId);
+	};
 	const checkForAnswerMatch = (choice) => {
 		if (choice.toLowerCase().split(' ').join('') === questionId) {
 			return true;

@@ -10,10 +10,38 @@ const HomeScreen = () => {
 	const toggleAnswered = () => {
 		setShowAnswered(!showAnswered);
 	};
+
+	//TODO: refactor for less code duplication
 	const unAnsweredQuestions = useSelector(currentUnAnswered);
 	const AnsweredQuestions = useSelector(answers);
 
-	const AnsweredList = AnsweredQuestions.map((question) => {
+	let sortedAnswered = [...AnsweredQuestions];
+	if (AnsweredQuestions.length > 0) {
+		sortedAnswered.sort((a, b) => {
+			let comparison = 0;
+			if (a.timeCreated < b.timeCreated) {
+				comparison = 1;
+			} else if (a.timeCreated > b.timeCreated) {
+				comparison = -1;
+			}
+			return comparison;
+		});
+	}
+
+	let sortedUnAnswered = [...unAnsweredQuestions];
+	if (unAnsweredQuestions.length > 0) {
+		sortedUnAnswered.sort((a, b) => {
+			let comparison = 0;
+			if (a.timeCreated < b.timeCreated) {
+				comparison = 1;
+			} else if (a.timeCreated > b.timeCreated) {
+				comparison = -1;
+			}
+			return comparison;
+		});
+	}
+
+	const AnsweredList = sortedAnswered.map((question) => {
 		return (
 			<Answered
 				key={question.timeCreated}
@@ -26,7 +54,7 @@ const HomeScreen = () => {
 		);
 	});
 
-	const unAnswered = unAnsweredQuestions.map((question) => {
+	const unAnswered = sortedUnAnswered.map((question) => {
 		return (
 			<UnAnswered
 				key={question.timeCreated}
