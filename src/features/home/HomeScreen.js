@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import UnAnswered from '../home/UnAnswered';
+import Answered from '../home/Answered';
 import { currentUnAnswered } from './homeSlice';
 import { answers, currentUserObject } from '../login/loginSlice';
 import { useSelector } from 'react-redux';
@@ -14,9 +15,9 @@ const HomeScreen = () => {
 	const AnsweredQuestions = useSelector(answers);
 	const currentUser = useSelector(currentUserObject);
 
-	const Answered = AnsweredQuestions.map((question) => {
+	const AnsweredList = AnsweredQuestions.map((question) => {
 		return (
-			<DisplayAnswer
+			<Answered
 				key={question.timeCreated}
 				choiceOne={question.choiceOne}
 				choiceTwo={question.choiceTwo}
@@ -57,7 +58,7 @@ const HomeScreen = () => {
 					</li>
 				)}
 			</ul>
-			{showAnswered ? <Fragment>{Answered}</Fragment> : <Fragment>{unAnswered}</Fragment>}
+			{showAnswered ? <Fragment>{AnsweredList}</Fragment> : <Fragment>{unAnswered}</Fragment>}
 		</div>
 	);
 };

@@ -12,6 +12,7 @@ export const slice = createSlice({
 				choiceTwo: 'study biology',
 				choiceOneVotes: ['Naruto'],
 				choiceTwoVotes: [],
+				answerId: '',
 			},
 			{
 				id: 'Gwen Stacy',
@@ -21,6 +22,7 @@ export const slice = createSlice({
 				choiceTwo: 'Marry Spiderman',
 				choiceOneVotes: [],
 				choiceTwoVotes: [],
+				answerId: '',
 			},
 			{
 				id: 'Naruto',
@@ -30,6 +32,7 @@ export const slice = createSlice({
 				choiceTwo: 'train with Rock Lee',
 				choiceOneVotes: [],
 				choiceTwoVotes: [],
+				answerId: '',
 			},
 			{
 				id: 'Megaman',
@@ -39,8 +42,10 @@ export const slice = createSlice({
 				choiceTwo: 'adventure with Zero',
 				choiceOneVotes: [],
 				choiceTwoVotes: [],
+				answerId: '',
 			},
 		],
+		currentPollAnswer: {},
 	},
 	reducers: {
 		setUnansweredQuestions: (state, action) => {
@@ -49,10 +54,13 @@ export const slice = createSlice({
 		addQuestionToUnAnswered: (state, action) => {
 			state.unAnsweredQuestions = action.payload;
 		},
+		setCurrentPollAnswer: (state, action) => {
+			state.currentPollAnswer = action.payload;
+		},
 	},
 });
 
-export const { setUnansweredQuestions, addQuestionToUnAnswered, setAnsweredQuestions } = slice.actions;
+export const { setUnansweredQuestions, addQuestionToUnAnswered, setCurrentPollAnswer } = slice.actions;
 
 //actions
 export const setCurrentUnAnswered = (home) => (dispatch) => {
@@ -65,4 +73,5 @@ export const addQuestion = (home) => (dispatch) => {
 //exports
 export const currentUnAnswered = (state) => state.home.unAnsweredQuestions;
 export const currentAnswered = (state) => state.home.answeredQuestions;
+export const currentPollAnswer = (state) => state.home.currentPollAnswer;
 export default slice.reducer;
