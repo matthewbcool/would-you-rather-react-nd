@@ -16,7 +16,10 @@ const DisplayAnswer = (props) => {
 	if (userObj.profile === '') {
 		history.push('/');
 	}
-	console.log(globalUserObjects);
+	const getPercentage = (numVotes) => {
+		let numUsers = globalUserObjects.length;
+		return Math.floor((numVotes / numUsers) * 100);
+	};
 
 	const checkForAnswerMatch = (choice) => {
 		if (choice.toLowerCase().split(' ').join('') === id) {
@@ -49,14 +52,24 @@ const DisplayAnswer = (props) => {
 						{checkAnswerOne}
 						<label htmlFor="">{currentPoll.choiceOne}</label>
 					</div>
-					<span className="vote-txt">Total Votes: {currentPoll.choiceOneVotes.length}</span>
+					<span className="vote-txt">
+						Total Votes: {currentPoll.choiceOneVotes.length}
+						<span className="percentage-txt">
+							{`${getPercentage(currentPoll.choiceOneVotes.length)} %`}
+						</span>
+					</span>
 				</div>
 				<div className="input-item-poll">
 					<div>
 						{checkAnswerTwo}
 						<label htmlFor="">{currentPoll.choiceTwo}</label>
 					</div>
-					<span className="vote-txt">Total Votes: {currentPoll.choiceTwoVotes.length}</span>
+					<span className="vote-txt">
+						Total Votes: {currentPoll.choiceTwoVotes.length}
+						<span className="percentage-txt">{`${getPercentage(
+							currentPoll.choiceTwoVotes.length
+						)} %`}</span>
+					</span>
 				</div>
 				<Link to={`/`}>
 					<button type="submit" className="submit-btn">
