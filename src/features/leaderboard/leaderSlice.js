@@ -46,7 +46,7 @@ export const updateLeaderBoard = (userObjects, currentUserObject) => (dispatch) 
 			updatedUserObjects.push(userObject);
 		}
 	});
-	console.log(updatedUserObjects);
+
 	dispatch(setLeaderboard(updatedUserObjects));
 };
 

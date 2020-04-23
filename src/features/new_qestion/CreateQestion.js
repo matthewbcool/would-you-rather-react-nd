@@ -27,7 +27,7 @@ const CreateQestion = () => {
 		};
 		let addQuestion = [...unAnswered, question];
 		dispatch(addQuestionToUnAnswered(addQuestion));
-		console.log(currentUser);
+
 		// clone and add the question for update
 		let updatedCurrentUserObject = { ...currentUser };
 		updatedCurrentUserObject.questionCount = updatedCurrentUserObject.questionCount + 1;

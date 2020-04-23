@@ -25,26 +25,30 @@ const UnAnswered = (props) => {
 	};
 
 	const submit = (e) => {
-		let updatedUnAnswered = filterOutCurrentQuestion(props.questionObject);
+		if (questionId === '') {
+			alert('please choose an option');
+		} else {
+			let updatedUnAnswered = filterOutCurrentQuestion(props.questionObject);
 
-		dispatch(setCurrentUnAnswered(updatedUnAnswered));
-		//if the answer is equal to choice one push the name of the user to choice one, if not push to choice two
-		let updateQuestionObject = { ...props.questionObject };
-		if (props.choiceOne === answer) {
-			updateQuestionObject.answerId = questionId;
-			updateQuestionObject.choiceOneVotes = [...updateQuestionObject.choiceOneVotes, user];
-		}
-		if (props.choiceTwo === answer) {
-			updateQuestionObject.answerId = questionId;
-			updateQuestionObject.choiceTwoVotes = [...updateQuestionObject.choiceTwoVotes, user];
-		}
-		//clone the object and create a new user object
-		let updatedCurrentUserObject = { ...currentUserObj };
-		updatedCurrentUserObject.answers = [...updatedCurrentUserObject.answers, updateQuestionObject];
+			dispatch(setCurrentUnAnswered(updatedUnAnswered));
+			//if the answer is equal to choice one push the name of the user to choice one, if not push to choice two
+			let updateQuestionObject = { ...props.questionObject };
+			if (props.choiceOne === answer) {
+				updateQuestionObject.answerId = questionId;
+				updateQuestionObject.choiceOneVotes = [...updateQuestionObject.choiceOneVotes, user];
+			}
+			if (props.choiceTwo === answer) {
+				updateQuestionObject.answerId = questionId;
+				updateQuestionObject.choiceTwoVotes = [...updateQuestionObject.choiceTwoVotes, user];
+			}
+			//clone the object and create a new user object
+			let updatedCurrentUserObject = { ...currentUserObj };
+			updatedCurrentUserObject.answers = [...updatedCurrentUserObject.answers, updateQuestionObject];
 
-		dispatch(updateAnsweredQuestions([...answersArray, updateQuestionObject]));
-		dispatch(setCurrentPollAnswer(updateQuestionObject));
-		dispatch(updateLeaderBoard(globalUserObjects, updatedCurrentUserObject));
+			dispatch(updateAnsweredQuestions([...answersArray, updateQuestionObject]));
+			dispatch(setCurrentPollAnswer(updateQuestionObject));
+			dispatch(updateLeaderBoard(globalUserObjects, updatedCurrentUserObject));
+		}
 	};
 
 	return (
