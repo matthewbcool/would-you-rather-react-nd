@@ -2,9 +2,8 @@ import React, { useState, Fragment } from 'react';
 import UnAnswered from '../home/UnAnswered';
 import Answered from '../home/Answered';
 import { currentUnAnswered } from './homeSlice';
-import { answers, currentUserObject } from '../login/loginSlice';
+import { answers } from '../login/loginSlice';
 import { useSelector } from 'react-redux';
-import DisplayAnswer from '../home/DisplayAnswer';
 
 const HomeScreen = () => {
 	const [showAnswered, setShowAnswered] = useState(false);
@@ -13,8 +12,7 @@ const HomeScreen = () => {
 	};
 	const unAnsweredQuestions = useSelector(currentUnAnswered);
 	const AnsweredQuestions = useSelector(answers);
-	const currentUser = useSelector(currentUserObject);
-	console.log(AnsweredQuestions);
+
 	const AnsweredList = AnsweredQuestions.map((question) => {
 		return (
 			<Answered
@@ -53,7 +51,7 @@ const HomeScreen = () => {
 				) : (
 					<li>
 						<button onClick={toggleAnswered} className="question-choice">
-							Answered Questions
+							Go to Answered ->
 						</button>
 					</li>
 				)}

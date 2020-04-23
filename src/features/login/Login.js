@@ -9,7 +9,6 @@ const Login = () => {
 	let history = useHistory();
 	let location = useLocation();
 	const globalUserObjects = useSelector(userObjects);
-	console.log(globalUserObjects);
 	const getUserObjectFromData = (userName) => {
 		let userObject = {};
 		globalUserObjects.forEach((item) => {

@@ -1,18 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React from 'react';
 import { useParams, Link, useHistory } from 'react-router-dom';
 import { currentPollAnswer } from '../home/homeSlice';
-import { currentUser, currentUserObject, isLoggedIn, answers } from '../login/loginSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { currentUserObject } from '../login/loginSlice';
+import { useSelector } from 'react-redux';
 import { userObjects } from '../leaderboard/leaderSlice';
 
 const DisplayAnswer = (props) => {
 	let { id } = useParams();
-	let dispatch = useDispatch();
 	let history = useHistory();
-	let answered = useSelector(answers);
 	let currentPoll = useSelector(currentPollAnswer);
 	let globalUserObjects = useSelector(userObjects);
-	let user = useSelector(currentUser);
 	let userObj = useSelector(currentUserObject);
 
 	//redirect to login if nobody is logged in
@@ -43,7 +40,7 @@ const DisplayAnswer = (props) => {
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
 				<h3>{`${currentPoll.id} asks:`}</h3>
-				<img className="profile-pic" src={currentPoll.profile} />
+				<img className="profile-pic" src={currentPoll.profile} alt="user profile" />
 			</div>
 			<h2>Would you rather...</h2>
 			<form name="question">

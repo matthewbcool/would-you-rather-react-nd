@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import '../home/home.css';
 import { Link } from 'react-router-dom';
-import { currentUnAnswered, setCurrentUnAnswered, setCurrentPollAnswer } from '../home/homeSlice';
-import { currentUser, answers } from '../login/loginSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPollAnswer } from '../home/homeSlice';
+import { useDispatch } from 'react-redux';
 
 const Answered = (props) => {
-	const [answer, setAnswer] = useState('');
 	const [questionId, setQuestionId] = useState('');
 	const dispatch = useDispatch();
-	const user = useSelector(currentUser);
-	const currentUnAnsweredArray = useSelector(currentUnAnswered);
-	useEffect(() => {
-		getId();
-	}, []);
-	const getId = () => {
+
+	useEffect((props) => {
 		setQuestionId(props.questionObject.answerId);
-	};
+	}, []);
+
 	const checkForAnswerMatch = (choice) => {
 		if (choice.toLowerCase().split(' ').join('') === questionId) {
 			return true;
@@ -38,14 +33,6 @@ const Answered = (props) => {
 	const submit = (e) => {
 		//if the answer is equal to choice one push the name of the user to choice one, if not push to choice two
 		let updateQuestionObject = { ...props.questionObject };
-		if (props.choiceOne === answer) {
-			updateQuestionObject.answerId = questionId;
-			updateQuestionObject.choiceOneVotes = [...updateQuestionObject.choiceOneVotes, user];
-		}
-		if (props.choiceTwo === answer) {
-			updateQuestionObject.answerId = questionId;
-			updateQuestionObject.choiceTwoVotes = [...updateQuestionObject.choiceTwoVotes, user];
-		}
 
 		dispatch(setCurrentPollAnswer(updateQuestionObject));
 	};
