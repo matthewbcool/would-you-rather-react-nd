@@ -1,12 +1,10 @@
 import React from 'react';
 import LeaderBoardItem from './LeaderBoardItem';
-import { currentUserObject } from '../login/loginSlice';
 import { userObjects } from './leaderSlice';
 import { useSelector } from 'react-redux';
 import './leaderboard.css';
 const LeaderBoard = () => {
 	let users = useSelector(userObjects);
-
 	let leaderBoardItems = [];
 
 	let getScore = (userObj) => {

@@ -14,7 +14,7 @@ const HomeScreen = () => {
 	const unAnsweredQuestions = useSelector(currentUnAnswered);
 	const AnsweredQuestions = useSelector(answers);
 	const currentUser = useSelector(currentUserObject);
-
+	console.log(AnsweredQuestions);
 	const AnsweredList = AnsweredQuestions.map((question) => {
 		return (
 			<Answered

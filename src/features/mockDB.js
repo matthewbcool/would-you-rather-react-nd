@@ -1,6 +1,8 @@
 // At some point this could be a firestore db
 // TODO maybe grab profile pic from user data directly in question data?
 
+// this is no longer being used in the project----
+
 const data = [
 	{
 		user: 'Megaman',

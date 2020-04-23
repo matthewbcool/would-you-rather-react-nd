@@ -27,7 +27,11 @@ const CreateQestion = () => {
 		};
 		let addQuestion = [...unAnswered, question];
 		dispatch(addQuestionToUnAnswered(addQuestion));
-		dispatch(updateLeaderBoard(globalUserObjects, currentUser));
+		console.log(currentUser);
+		// clone and add the question for update
+		let updatedCurrentUserObject = { ...currentUser };
+		updatedCurrentUserObject.questionCount = updatedCurrentUserObject.questionCount + 1;
+		dispatch(updateLeaderBoard(globalUserObjects, updatedCurrentUserObject));
 		history.push('/');
 	};
 

@@ -3,6 +3,7 @@ import { useParams, Link, useHistory } from 'react-router-dom';
 import { currentPollAnswer } from '../home/homeSlice';
 import { currentUser, currentUserObject, isLoggedIn, answers } from '../login/loginSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { userObjects } from '../leaderboard/leaderSlice';
 
 const DisplayAnswer = (props) => {
 	let { id } = useParams();
@@ -10,6 +11,7 @@ const DisplayAnswer = (props) => {
 	let history = useHistory();
 	let answered = useSelector(answers);
 	let currentPoll = useSelector(currentPollAnswer);
+	let globalUserObjects = useSelector(userObjects);
 	let user = useSelector(currentUser);
 	let userObj = useSelector(currentUserObject);
 
@@ -17,10 +19,26 @@ const DisplayAnswer = (props) => {
 	if (userObj.profile === '') {
 		history.push('/');
 	}
-	console.log(id);
-	console.log(answered);
+	console.log(globalUserObjects);
 
-	console.log(currentPoll);
+	const checkForAnswerMatch = (choice) => {
+		if (choice.toLowerCase().split(' ').join('') === id) {
+			return true;
+		}
+		return false;
+	};
+	console.log(userObj);
+
+	const checkAnswerOne = checkForAnswerMatch(currentPoll.choiceOne) ? (
+		<input type="radio" id={currentPoll.choiceOne} name="question" value={currentPoll.choiceOne} defaultChecked />
+	) : (
+		<input type="radio" id={currentPoll.choiceOne} name="question" value={currentPoll.choiceOne} disabled />
+	);
+	const checkAnswerTwo = checkForAnswerMatch(currentPoll.choiceTwo) ? (
+		<input type="radio" id={currentPoll.choiceTwo} name="question" value={currentPoll.choiceTwo} defaultChecked />
+	) : (
+		<input type="radio" id={currentPoll.choiceTwo} name="question" value={currentPoll.choiceTwo} disabled />
+	);
 	return (
 		<div className="unanswered-wrapper">
 			<div className="profile-asking-wrapper">
@@ -29,17 +47,19 @@ const DisplayAnswer = (props) => {
 			</div>
 			<h2>Would you rather...</h2>
 			<form name="question">
-				<div className="input-item">
-					<Fragment>
-						<input type="radio" id="input-one" name="question" value={currentPoll.choiceOne} />
+				<div className="input-item-poll">
+					<div>
+						{checkAnswerOne}
 						<label htmlFor="">{currentPoll.choiceOne}</label>
-					</Fragment>
+					</div>
+					<span className="vote-txt">Total Votes: {currentPoll.choiceOneVotes.length}</span>
 				</div>
-				<div className="input-item">
-					<Fragment>
-						<input type="radio" id="input-two" name="question" value={currentPoll.choiceTwo} />
+				<div className="input-item-poll">
+					<div>
+						{checkAnswerTwo}
 						<label htmlFor="">{currentPoll.choiceTwo}</label>
-					</Fragment>
+					</div>
+					<span className="vote-txt">Total Votes: {currentPoll.choiceTwoVotes.length}</span>
 				</div>
 				<Link to={`/`}>
 					<button type="submit" className="submit-btn">

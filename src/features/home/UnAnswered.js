@@ -9,7 +9,9 @@ import {
 	currentUserObject,
 	answers,
 	updateAnsweredQuestions,
+	setCurrentUserObject,
 } from '../login/loginSlice';
+import { updateLeaderBoard, userObjects } from '../leaderboard/leaderSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const UnAnswered = (props) => {
@@ -18,6 +20,7 @@ const UnAnswered = (props) => {
 	const dispatch = useDispatch();
 	const answersArray = useSelector(answers);
 	const user = useSelector(currentUser);
+	const globalUserObjects = useSelector(userObjects);
 	const currentUserObj = useSelector(currentUserObject);
 	const currentUnAnsweredArray = useSelector(currentUnAnswered);
 	const onFormChange = (e) => {
@@ -31,6 +34,7 @@ const UnAnswered = (props) => {
 
 	const submit = (e) => {
 		let updatedUnAnswered = filterOutCurrentQuestion(props.questionObject);
+
 		dispatch(setCurrentUnAnswered(updatedUnAnswered));
 		//if the answer is equal to choice one push the name of the user to choice one, if not push to choice two
 		let updateQuestionObject = { ...props.questionObject };
@@ -42,9 +46,13 @@ const UnAnswered = (props) => {
 			updateQuestionObject.answerId = questionId;
 			updateQuestionObject.choiceTwoVotes = [...updateQuestionObject.choiceTwoVotes, user];
 		}
+		//clone the object and create a new user object
+		let updatedCurrentUserObject = { ...currentUserObj };
+		updatedCurrentUserObject.answers = [...updatedCurrentUserObject.answers, updateQuestionObject];
 
 		dispatch(updateAnsweredQuestions([...answersArray, updateQuestionObject]));
 		dispatch(setCurrentPollAnswer(updateQuestionObject));
+		dispatch(updateLeaderBoard(globalUserObjects, updatedCurrentUserObject));
 	};
 
 	return (

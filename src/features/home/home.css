@@ -47,6 +47,13 @@ form {
 	justify-content: flex-start;
 	width: 350px;
 }
+.input-item-poll {
+	width: 350px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
 .selected {
 	background-color: lightgreen;
 }
@@ -61,8 +68,4 @@ ul {
 .question-choice {
 	height: 48px;
 	width: 140px;
-}
-
-.votes {
-	padding-left: 10px;
 }
