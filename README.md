@@ -1,3 +1,7 @@
+## Project Description
+
+This is a project built for udacity's react ND. The application's state is managed by a redux store and the 'backend' is initialized as initial state in the store so a browser refresh will reset state. One day I hope to use firestore to provide persistant state to the application but for now just building to the specifications.
+
 ## Install
 
 use `yarn install` to install dependencies.
