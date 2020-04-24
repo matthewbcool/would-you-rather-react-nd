@@ -11,21 +11,35 @@ const DisplayAnswer = (props) => {
 	let currentPoll = useSelector(currentPollAnswer);
 	let globalUserObjects = useSelector(userObjects);
 	let userObj = useSelector(currentUserObject);
-
+	let totalVotesOne;
+	let totalVotesTwo;
 	//redirect to login if nobody is logged in
 	if (userObj.profile === '') {
 		history.push('/');
 	}
+
+	if (typeof currentPoll.choiceOneVotes === 'undefined') {
+		totalVotesOne = '';
+		totalVotesTwo = '';
+	} else {
+		totalVotesOne = currentPoll.choiceOneVotes.length;
+		totalVotesTwo = currentPoll.choiceTwoVotes.length;
+	}
+
 	const getPercentage = (numVotes) => {
 		let numUsers = globalUserObjects.length;
 		return Math.floor((numVotes / numUsers) * 100);
 	};
 
 	const checkForAnswerMatch = (choice) => {
-		if (choice.toLowerCase().split(' ').join('') === id) {
-			return true;
+		if (typeof choice === 'undefined') {
+			return;
+		} else {
+			if (choice.toLowerCase().split(' ').join('') === id) {
+				return true;
+			}
+			return false;
 		}
-		return false;
 	};
 	console.log(userObj);
 
@@ -53,10 +67,8 @@ const DisplayAnswer = (props) => {
 						<label htmlFor="">{currentPoll.choiceOne}</label>
 					</div>
 					<span className="vote-txt">
-						Total Votes: {currentPoll.choiceOneVotes.length}
-						<span className="percentage-txt">
-							{`${getPercentage(currentPoll.choiceOneVotes.length)} %`}
-						</span>
+						Total Votes: {totalVotesOne}
+						<span className="percentage-txt">{`${getPercentage(totalVotesOne)} %`}</span>
 					</span>
 				</div>
 				<div className="input-item-poll">
@@ -65,10 +77,8 @@ const DisplayAnswer = (props) => {
 						<label htmlFor="">{currentPoll.choiceTwo}</label>
 					</div>
 					<span className="vote-txt">
-						Total Votes: {currentPoll.choiceTwoVotes.length}
-						<span className="percentage-txt">{`${getPercentage(
-							currentPoll.choiceTwoVotes.length
-						)} %`}</span>
+						Total Votes: {totalVotesTwo}
+						<span className="percentage-txt">{`${getPercentage(totalVotesTwo)} %`}</span>
 					</span>
 				</div>
 				<Link to={`/`}>
